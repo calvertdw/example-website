@@ -1,35 +1,16 @@
-import org.gradle.kotlin.dsl.closureOf
-
-buildscript {
-   repositories {
-      maven { url = uri("https://plugins.gradle.org/m2/") }
-      mavenLocal()
-   }
-
-   dependencies {
-      classpath "us.ihmc:ihmc-build:0.12.10"
-   }
-}
-apply plugin: "us.ihmc.ihmc-build"
-
-ihmc {
-   group = "com.calvertsoftware"
-   version = "0.0.1"
-   vcsUrl = "https://github.com/calvertdw/example-website"
-   
-   configureDependencyResolution()
-   configurePublications()
+plugins {
+    kotlin("jvm") version "1.2.31"
 }
 
-mainDependencies {
-
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
 }
 
-serverDependencies {
-   compile(group to "org.mapdb", name to "mapdb", version to "3.0.5")
-   compile group: "org.nanohttpd", name: "nanohttpd", version: "2.2.0"
-}
-
-testClientDependencies {
-   compile group: "org.mashape.unirest", name: "unirest-java", version: "1.4.9"
+dependencies {
+    implementation(kotlin("stdlib", "1.2.31"))
+    compile("org.mapdb:mapdb:3.0.5")
+    compile("org.nanohttpd:nanohttpd:2.2.0")
+    compile("com.mashape.unirest:unirest-java:1.4.9")
 }
